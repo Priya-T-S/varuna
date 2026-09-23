@@ -1,0 +1,24 @@
+==============================================
+       VARUNA AI SATELLITE MODEL REPORT
+==============================================
+Model:                swin-tiny
+Version:              v1
+Task:                 Rainfall category from satellite cloud scene (0/1/2)
+Imagery:              4999 MODIS scenes (2001-01-03 → 2024-12-28)
+----------------------------------------------
+Accuracy:             85.2%   (imbalance-inflated; not the selection metric)
+Precision (macro):    69.0%
+Recall (macro):       85.1%
+F1 Score (macro):     72.8%
+----------------------------------------------
+Per-class performance (held-out test period):
+  Normal   precision  98.0%  recall  85.2%  (n=688)
+  Heavy    precision  40.0%  recall  85.0%  (n=80)
+  Extreme  precision   0.0%  recall   0.0%  (n=0)
+----------------------------------------------
+Validation comparison (selection metric: macro-F1):
+  swin-tiny    f1_macro 0.769  recall_macro 0.877  accuracy 0.868 <- selected
+----------------------------------------------
+Selection reason:     HuggingFace pretrained backbone (microsoft/swin-tiny-patch4-window7-224), head fine-tuned for 8 epochs, val macro-F1 = 0.769
+Performance:          GOOD
+==============================================

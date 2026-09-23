@@ -1,0 +1,91 @@
+{
+  "id": "experiment_004",
+  "date": "2026-08-15T05:54:05.055770+00:00",
+  "phase": "4-satellite",
+  "model_version": "v1",
+  "device": "mps",
+  "candidates": {
+    "custom_cnn": {
+      "validation_metrics": {
+        "accuracy": 0.8901734104046243,
+        "precision_macro": 0.8939759036144579,
+        "recall_macro": 0.9031506849315067,
+        "f1_macro": 0.889805223105032
+      },
+      "epochs": 12
+    }
+  },
+  "selected_model": "custom_cnn",
+  "selection_reason": "highest validation macro-F1 (0.890) with chronological splits; accuracy not used (class imbalance)",
+  "test_metrics": {
+    "accuracy": 0.8633879781420765,
+    "precision_macro": 0.8678374490529849,
+    "recall_macro": 0.8705022941318522,
+    "f1_macro": 0.8633226779792669,
+    "per_class": {
+      "0": {
+        "precision": 0.9418604651162791,
+        "recall": 0.801980198019802,
+        "support": 101
+      },
+      "1": {
+        "precision": 0.7938144329896907,
+        "recall": 0.9390243902439024,
+        "support": 82
+      },
+      "2": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 0
+      }
+    },
+    "confusion_matrix": [
+      [
+        81,
+        20,
+        0
+      ],
+      [
+        5,
+        77,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "labels": [
+      0,
+      1,
+      2
+    ]
+  },
+  "dataset": {
+    "source": "NASA GIBS MODIS Terra (True Color + Band31 IR), real scenes",
+    "scenes": 1215,
+    "date_range": [
+      "2001-05-31",
+      "2024-12-28"
+    ],
+    "class_counts": {
+      "0": 730,
+      "1": 482,
+      "2": 3
+    },
+    "splits": {
+      "train": 859,
+      "val": 173,
+      "test": 183
+    }
+  },
+  "artifacts": {
+    "checkpoint": "/Users/kishan/projects/isrosih-main/ai_models/saved_models/satellite_model_v1.pt",
+    "report": "/Users/kishan/projects/isrosih-main/reports/satellite_model_report_v1.txt",
+    "curves": "/Users/kishan/projects/isrosih-main/reports/satellite_training_curves_v1.png",
+    "confusion_matrix": "/Users/kishan/projects/isrosih-main/reports/satellite_confusion_matrix_v1.png",
+    "sample_predictions": "/Users/kishan/projects/isrosih-main/reports/satellite_sample_predictions_v1.png",
+    "fusion_features": "/Users/kishan/projects/isrosih-main/data/processed/features/satellite_features.parquet"
+  }
+}

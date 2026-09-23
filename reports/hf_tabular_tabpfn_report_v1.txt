@@ -1,0 +1,32 @@
+======================================================================
+  VARUNA AI — HuggingFace Tabular Model Report
+  Model: tabpfn
+  Date:  2026-08-21 04:42 UTC
+======================================================================
+
+Training required: No (zero-shot)
+Dataset rows: 69888  |  Train: 8000  Val: 10480  Test: 10480
+
+── Validation ─────────────────────────────────────────────────
+  Accuracy:         0.9930
+  Macro Precision:  0.4965
+  Macro Recall:     0.5000
+  Macro F1:         0.4982
+
+── Test (held-out) ─────────────────────────────────────────────
+  Accuracy:         0.9860
+  Macro Precision:  0.4932
+  Macro Recall:     0.4997
+  Macro F1:         0.4965
+
+── Per-class Test ──────────────────────────────────────────────
+  Normal      P=0.986  R=0.999  F1=0.993  n=1973
+  Heavy       P=0.000  R=0.000  F1=0.000  n=27
+  Extreme     P=0.000  R=0.000  F1=0.000  n=0
+
+── vs. Existing Baseline (weighted_fusion_w0.85) ───────────────
+  Baseline test macro-F1:  0.6878
+  This model test macro-F1: 0.4965
+  Delta: -0.1913
+
+======================================================================

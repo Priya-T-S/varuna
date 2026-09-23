@@ -1,0 +1,77 @@
+{
+  "_meta": {
+    "description": "Per-region hydro-climate profile used by the what-if simulator and the alert monitor.",
+    "fields": {
+      "monthly_rain_mm": "Approximate long-period-average monthly rainfall (Jan..Dec), IMD normals.",
+      "heavy_spell": "A representative monsoon heavy-rain spell used as the default what-if baseline (rain_1d = 24 h, rain_3d = 72 h accumulation).",
+      "typical_weather": "Typical meteorological state during a heavy-rain spell - fills model inputs the user does not specify.",
+      "peak_month": "Month (1-12) whose climatology and seasonality are used for the what-if baseline."
+    }
+  },
+  "regions": [
+    {
+      "name": "Kerala", "state": "Kerala", "lat": 10.0, "lon": 76.3, "peak_month": 7,
+      "monthly_rain_mm": [10, 15, 30, 110, 220, 650, 700, 420, 260, 290, 160, 40],
+      "heavy_spell": {"rain_1d": 90, "rain_3d": 220},
+      "typical_weather": {"temperature_c": 26.5, "humidity_pct": 90, "pressure_hpa": 1003, "wind_speed_ms": 6.5, "wind_direction_deg": 250, "cloud_cover_pct": 92},
+      "districts": [
+        {"name": "Alappuzha", "collector_office": "District Collectorate, Alappuzha", "lat": 9.49, "lon": 76.33},
+        {"name": "Pathanamthitta", "collector_office": "District Collectorate, Pathanamthitta", "lat": 9.26, "lon": 76.78},
+        {"name": "Ernakulam", "collector_office": "District Collectorate, Kakkanad (Ernakulam)", "lat": 10.02, "lon": 76.34},
+        {"name": "Thrissur", "collector_office": "District Collectorate, Ayyanthole (Thrissur)", "lat": 10.52, "lon": 76.21},
+        {"name": "Kottayam", "collector_office": "District Collectorate, Kottayam", "lat": 9.59, "lon": 76.52},
+        {"name": "Idukki", "collector_office": "District Collectorate, Painavu (Idukki)", "lat": 9.85, "lon": 76.97},
+        {"name": "Wayanad", "collector_office": "District Collectorate, Kalpetta (Wayanad)", "lat": 11.61, "lon": 76.08},
+        {"name": "Malappuram", "collector_office": "District Collectorate, Malappuram", "lat": 11.07, "lon": 76.07},
+        {"name": "Thiruvananthapuram", "collector_office": "District Collectorate, Thiruvananthapuram", "lat": 8.52, "lon": 76.94},
+        {"name": "Kozhikode", "collector_office": "District Collectorate, Kozhikode", "lat": 11.26, "lon": 75.78}
+      ]
+    },
+    {
+      "name": "Mumbai", "state": "Maharashtra", "lat": 19.07, "lon": 72.88, "peak_month": 7,
+      "monthly_rain_mm": [1, 1, 0, 1, 12, 500, 840, 560, 330, 90, 15, 5],
+      "heavy_spell": {"rain_1d": 150, "rain_3d": 300},
+      "typical_weather": {"temperature_c": 27.0, "humidity_pct": 92, "pressure_hpa": 1001, "wind_speed_ms": 7.5, "wind_direction_deg": 245, "cloud_cover_pct": 95},
+      "districts": [
+        {"name": "Mumbai City", "collector_office": "Collector Office, Mumbai City (Old Custom House)", "lat": 18.93, "lon": 72.83},
+        {"name": "Mumbai Suburban", "collector_office": "Collector Office, Mumbai Suburban (Bandra East)", "lat": 19.06, "lon": 72.85}
+      ]
+    },
+    {
+      "name": "Chennai", "state": "Tamil Nadu", "lat": 13.05, "lon": 80.22, "peak_month": 11,
+      "monthly_rain_mm": [25, 5, 5, 15, 45, 55, 100, 130, 130, 280, 350, 180],
+      "heavy_spell": {"rain_1d": 100, "rain_3d": 180},
+      "typical_weather": {"temperature_c": 25.5, "humidity_pct": 90, "pressure_hpa": 1004, "wind_speed_ms": 6.0, "wind_direction_deg": 60, "cloud_cover_pct": 90},
+      "districts": [
+        {"name": "Chennai", "collector_office": "Collectorate, Chennai (Singaravelar Maaligai)", "lat": 13.09, "lon": 80.29},
+        {"name": "Chengalpattu", "collector_office": "Collectorate, Chengalpattu", "lat": 12.69, "lon": 79.98},
+        {"name": "Tiruvallur", "collector_office": "Collectorate, Tiruvallur", "lat": 13.14, "lon": 79.91}
+      ]
+    },
+    {
+      "name": "Assam", "state": "Assam", "lat": 26.2, "lon": 92.9, "peak_month": 7,
+      "monthly_rain_mm": [12, 25, 65, 160, 280, 400, 420, 330, 260, 110, 15, 8],
+      "heavy_spell": {"rain_1d": 80, "rain_3d": 180},
+      "typical_weather": {"temperature_c": 28.5, "humidity_pct": 88, "pressure_hpa": 1000, "wind_speed_ms": 3.5, "wind_direction_deg": 200, "cloud_cover_pct": 88},
+      "districts": [
+        {"name": "Dhemaji", "collector_office": "Deputy Commissioner Office, Dhemaji", "lat": 27.48, "lon": 94.58},
+        {"name": "Lakhimpur", "collector_office": "Deputy Commissioner Office, North Lakhimpur", "lat": 27.24, "lon": 94.10},
+        {"name": "Majuli", "collector_office": "Deputy Commissioner Office, Garamur (Majuli)", "lat": 26.95, "lon": 94.17},
+        {"name": "Dibrugarh", "collector_office": "Deputy Commissioner Office, Dibrugarh", "lat": 27.48, "lon": 94.91},
+        {"name": "Sivasagar", "collector_office": "Deputy Commissioner Office, Sivasagar", "lat": 26.98, "lon": 94.64},
+        {"name": "Jorhat", "collector_office": "Deputy Commissioner Office, Jorhat", "lat": 26.75, "lon": 94.20},
+        {"name": "Golaghat", "collector_office": "Deputy Commissioner Office, Golaghat", "lat": 26.52, "lon": 93.96},
+        {"name": "Nagaon", "collector_office": "Deputy Commissioner Office, Nagaon", "lat": 26.35, "lon": 92.68},
+        {"name": "Hojai", "collector_office": "Deputy Commissioner Office, Hojai", "lat": 26.00, "lon": 92.86},
+        {"name": "Morigaon", "collector_office": "Deputy Commissioner Office, Morigaon", "lat": 26.25, "lon": 92.34},
+        {"name": "Kamrup Metropolitan", "collector_office": "Deputy Commissioner Office, Guwahati (Kamrup M)", "lat": 26.14, "lon": 91.74},
+        {"name": "Nalbari", "collector_office": "Deputy Commissioner Office, Nalbari", "lat": 26.44, "lon": 91.44},
+        {"name": "Barpeta", "collector_office": "Deputy Commissioner Office, Barpeta", "lat": 26.32, "lon": 91.00},
+        {"name": "Bongaigaon", "collector_office": "Deputy Commissioner Office, Bongaigaon", "lat": 26.48, "lon": 90.56},
+        {"name": "Goalpara", "collector_office": "Deputy Commissioner Office, Goalpara", "lat": 26.17, "lon": 90.62},
+        {"name": "Dhubri", "collector_office": "Deputy Commissioner Office, Dhubri", "lat": 26.02, "lon": 89.98},
+        {"name": "Cachar", "collector_office": "Deputy Commissioner Office, Silchar (Cachar)", "lat": 24.83, "lon": 92.80}
+      ]
+    }
+  ]
+}

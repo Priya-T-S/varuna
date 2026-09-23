@@ -1,0 +1,107 @@
+{
+  "model": "fttransformer",
+  "hf_id": null,
+  "needs_training": true,
+  "version": "v1",
+  "date": "2026-08-21T04:16:53.190156+00:00",
+  "validation": {
+    "accuracy": 0.8712786259541985,
+    "precision_macro": 0.35070987526973085,
+    "recall_macro": 0.5778082285711758,
+    "f1_macro": 0.3437328522025935,
+    "per_class": {
+      "0": {
+        "precision": 0.9987868093084813,
+        "recall": 0.8713557201962859,
+        "f1": 0.9307297019527235,
+        "support": 10393
+      },
+      "1": {
+        "precision": 0.05334281650071124,
+        "recall": 0.8620689655172413,
+        "f1": 0.10046885465505694,
+        "support": 87
+      },
+      "2": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      }
+    },
+    "confusion_matrix": [
+      [
+        9056,
+        1331,
+        6
+      ],
+      [
+        11,
+        75,
+        1
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "test": {
+    "accuracy": 0.8485687022900763,
+    "precision_macro": 0.3455145218485171,
+    "recall_macro": 0.5513615161793571,
+    "f1_macro": 0.33008301181156735,
+    "per_class": {
+      "0": {
+        "precision": 0.9985300768882859,
+        "recall": 0.8488897433432664,
+        "f1": 0.917649503818777,
+        "support": 10403
+      },
+      "1": {
+        "precision": 0.03801348865726548,
+        "recall": 0.8051948051948052,
+        "f1": 0.07259953161592506,
+        "support": 77
+      },
+      "2": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      }
+    },
+    "confusion_matrix": [
+      [
+        8831,
+        1569,
+        3
+      ],
+      [
+        13,
+        62,
+        2
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "dataset": {
+    "records": 69888,
+    "splits": {
+      "train": 48928,
+      "val": 10480,
+      "test": 10480
+    },
+    "class_counts": {
+      "0": 48515,
+      "1": 410,
+      "2": 3
+    }
+  },
+  "artifact": "/Users/kishan/projects/isrosih-main/ai_models/saved_models/hf_tabular_fttransformer_v1.pkl"
+}

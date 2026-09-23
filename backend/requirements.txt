@@ -1,0 +1,51 @@
+# VARUNA AI backend dependencies.
+# Web framework and server
+fastapi>=0.115
+uvicorn[standard]>=0.32
+pydantic>=2.9
+pydantic-settings>=2.6
+
+# Database (PostgreSQL + PostGIS)
+sqlalchemy>=2.0
+geoalchemy2>=0.15
+psycopg[binary]>=3.2
+alembic>=1.13
+
+# Data handling (shared with ai_models/ and the data pipeline)
+numpy>=1.26
+pandas>=2.2
+pyarrow>=17.0            # parquet datasets
+pyyaml>=6.0              # config/data_config.yaml
+opencv-python-headless>=4.10  # satellite image preprocessing
+
+# NetCDF/HDF5 handling for ERA5 / IMERG / INSAT products (Phase 2+)
+xarray>=2024.6
+netcdf4>=1.7
+
+# HTTP client for external data sources (MOSDAC, NASA Earthdata)
+httpx>=0.27
+
+# Machine learning (baseline models, Phase 3; fusion, Phase 5)
+scikit-learn>=1.5
+xgboost>=2.1
+matplotlib>=3.9
+joblib>=1.4
+
+# Deep learning (satellite vision model, Phase 4; neural fusion, Phase 5)
+# NOTE: torch and xgboost each vendor libomp. The fusion pipeline drives
+# both in one process and pins OMP_NUM_THREADS=1 to stop them colliding —
+# see ai_models/fusion_model/__init__.py and docs/hybrid_ai_architecture.md.
+torch>=2.4
+torchvision>=0.19
+
+# Explainability (Phase 6)
+# NOTE: shap pulls numba, which constrains numpy. Installing it downgraded
+# numpy 2.5.1 -> 2.4.6 in this environment; the full suite passes on that.
+shap>=0.46
+captum>=0.7
+
+# What-if flood assistant (Claude API)
+anthropic>=1.6
+
+# Testing
+pytest>=8.3

@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  background: #f3f1ec;
+  color: #1c1917;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #b0d3e1;
+}
+
+/* One consistent, visible keyboard focus style. */
+:focus-visible {
+  outline: 2px solid #2a7797;
+  outline-offset: 2px;
+}
+
+/* Quiet scrollbars inside panels. */
+.scroll-quiet {
+  scrollbar-width: thin;
+  scrollbar-color: #d6d3d1 transparent;
+}
+
+.map-container {
+  height: 100%;
+  min-height: 22rem;
+}
+
+.leaflet-container {
+  font-family: inherit;
+  background: #e9e7e2;
+  border-radius: inherit;
+}
+
+.leaflet-control-zoom a {
+  color: #292524 !important;
+}
+
+.leaflet-bar {
+  border: 1px solid #e7e5e4 !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(28, 25, 23, 0.08) !important;
+}
+
+.leaflet-tooltip {
+  border-radius: 8px;
+  border: 1px solid #e7e5e4;
+  box-shadow: 0 4px 14px -4px rgba(28, 25, 23, 0.2);
+  padding: 6px 9px;
+}
+
+.leaflet-control-attribution {
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.8) !important;
+}

@@ -1,0 +1,55 @@
+# --- Secrets & environment ---
+.env
+.env.local
+*.env
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.myapp/
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+# Local SQLite database (alerts, recipients, chat history)
+backend/*.db
+
+# --- Node / frontend ---
+node_modules/
+frontend/dist/
+
+# --- Data & model artifacts (large binaries stay out of git) ---
+# Ignore dataset contents but keep the directory skeleton (.gitkeep).
+data/raw/**
+data/processed/**
+data/external/*
+data/labels/*
+data/metadata/*
+!data/raw/
+!data/raw/*/
+!data/processed/
+!data/processed/*/
+!**/.gitkeep
+ai_models/artifacts/
+# Keep datasets out of git. Only the small runtime model artifacts below are tracked
+# so the frontend/backend can run without retraining.
+# Experiment records (ai_models/experiments/) and reports/ stay tracked.
+ai_models/saved_models/*
+!ai_models/saved_models/.gitkeep
+!ai_models/saved_models/rainfall_model_v1.pkl
+!ai_models/saved_models/varuna_fusion_model_v1.pkl
+!ai_models/saved_models/satellite_model_v1.pt
+!ai_models/saved_models/model_info.json
+
+# --- Notebooks ---
+notebooks/.ipynb_checkpoints/
+
+# --- OS / editor ---
+.DS_Store
+.idea/
+.vscode/
+
+# --- Local screenshots / scratch files ---
+image.png
+ppt

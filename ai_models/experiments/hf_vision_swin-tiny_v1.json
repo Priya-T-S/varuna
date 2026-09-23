@@ -1,0 +1,123 @@
+{
+  "model": "swin-tiny",
+  "hf_id": "microsoft/swin-tiny-patch4-window7-224",
+  "version": "v1",
+  "epochs": 8,
+  "batch_size": 16,
+  "unfreeze_layers": 0,
+  "device": "mps",
+  "validation": {
+    "accuracy": 0.8681481481481481,
+    "precision_macro": 0.7282378987622019,
+    "recall_macro": 0.877104377104377,
+    "f1_macro": 0.7691740214630698,
+    "per_class": {
+      "0": {
+        "precision": 0.982791586998088,
+        "recall": 0.8653198653198653,
+        "support": 594
+      },
+      "1": {
+        "precision": 0.47368421052631576,
+        "recall": 0.8888888888888888,
+        "support": 81
+      },
+      "2": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 0
+      }
+    },
+    "confusion_matrix": [
+      [
+        514,
+        80,
+        0
+      ],
+      [
+        9,
+        72,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "labels": [
+      0,
+      1,
+      2
+    ]
+  },
+  "test": {
+    "accuracy": 0.8515625,
+    "precision_macro": 0.6899665551839465,
+    "recall_macro": 0.8508720930232558,
+    "f1_macro": 0.7276765163297045,
+    "per_class": {
+      "0": {
+        "precision": 0.979933110367893,
+        "recall": 0.8517441860465116,
+        "support": 688
+      },
+      "1": {
+        "precision": 0.4,
+        "recall": 0.85,
+        "support": 80
+      },
+      "2": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 0
+      }
+    },
+    "confusion_matrix": [
+      [
+        586,
+        102,
+        0
+      ],
+      [
+        12,
+        68,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "labels": [
+      0,
+      1,
+      2
+    ]
+  },
+  "dataset": {
+    "source": "NASA GIBS MODIS Terra (True Color + Band31 IR), real scenes",
+    "scenes": 4999,
+    "date_range": [
+      "2001-01-03",
+      "2024-12-28"
+    ],
+    "class_counts": {
+      "0": 4514,
+      "1": 482,
+      "2": 3
+    },
+    "splits": {
+      "train": 3556,
+      "val": 675,
+      "test": 768
+    }
+  },
+  "artifacts": {
+    "checkpoint": "/Users/kishan/projects/isrosih-main/ai_models/saved_models/hf_vision_swin-tiny_v1.pt",
+    "report": "/Users/kishan/projects/isrosih-main/reports/hf_vision_swin-tiny_report_v1.txt",
+    "curves": "/Users/kishan/projects/isrosih-main/reports/satellite_training_curves_v1.png",
+    "confusion_matrix": "/Users/kishan/projects/isrosih-main/reports/satellite_confusion_matrix_v1.png"
+  }
+}

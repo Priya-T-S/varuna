@@ -1,0 +1,106 @@
+{
+  "model": "tabpfn",
+  "hf_id": "prior-labs/TabPFN",
+  "needs_training": false,
+  "version": "v1",
+  "date": "2026-08-21T04:42:42.702311+00:00",
+  "validation": {
+    "accuracy": 0.993,
+    "precision_macro": 0.4965,
+    "recall_macro": 0.5,
+    "f1_macro": 0.49824385348720523,
+    "per_class": {
+      "0": {
+        "precision": 0.993,
+        "recall": 1.0,
+        "f1": 0.9964877069744105,
+        "support": 1986
+      },
+      "1": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 14
+      },
+      "2": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      }
+    },
+    "confusion_matrix": [
+      [
+        1986,
+        0,
+        0
+      ],
+      [
+        14,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "test": {
+    "accuracy": 0.986,
+    "precision_macro": 0.4932466233116558,
+    "recall_macro": 0.4997465788139889,
+    "f1_macro": 0.49647532729103727,
+    "per_class": {
+      "0": {
+        "precision": 0.9864932466233116,
+        "recall": 0.9994931576279777,
+        "f1": 0.9929506545820745,
+        "support": 1973
+      },
+      "1": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 27
+      },
+      "2": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      }
+    },
+    "confusion_matrix": [
+      [
+        1972,
+        1,
+        0
+      ],
+      [
+        27,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "dataset": {
+    "records": 69888,
+    "splits": {
+      "train": 8000,
+      "val": 10480,
+      "test": 10480
+    },
+    "class_counts": {
+      "0": 7952,
+      "1": 48
+    }
+  },
+  "artifact": "/Users/kishan/projects/isrosih-main/ai_models/saved_models/hf_tabular_tabpfn_v1.pkl"
+}
