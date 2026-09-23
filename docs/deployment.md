@@ -1,0 +1,74 @@
+# Deployment
+
+Two pieces, one public URL:
+
+- **Frontend** (React/Vite) on **Vercel** — static, fast, free.
+- **Backend** (FastAPI + PyTorch + SHAP) on **Hugging Face Spaces** (Docker) —
+  needs a long-running process and ~400 MB RAM.
+- `vercel.json` proxies `/api/*` from the Vercel domain to the Space, so the
+  browser only ever talks to one origin (no CORS setup, no mixed URLs).
+
+## Why not everything on Vercel
+
+Vercel's Python functions cap at 250 MB unzipped; `torch` alone is ~540 MB
+installed. The backend also runs a background alert monitor and an SSE feed,
+which serverless functions cannot keep alive. Free tiers with 512 MB RAM
+(Render, Railway) are below the ~390 MB the loaded models already occupy, so
+Spaces (16 GB, free) is the comfortable fit.
+
+## 1. Backend on Hugging Face Spaces
+
+1. https://huggingface.co/new-space → name `varuna-backend`, SDK **Docker**
+   (blank template), visibility public, hardware **CPU basic (free)**.
+2. Push this repository to the Space (the root `Dockerfile` is what it builds):
+
+   ```bash
+   git remote add space https://huggingface.co/spaces/<your-username>/varuna-backend
+   git push space main
+   ```
+
+   The first build takes ~10 minutes (PyTorch). Watch the **Logs** tab.
+3. Check it: `https://<your-username>-varuna-backend.hf.space/api/v1/health`
+   returns `{"status":"ok",...}`, and `/api/v1/predictions/model-info` reports
+   `"model_loaded": true`.
+
+Optional Space **Settings → Variables and secrets**:
+
+| Name | Value | Effect |
+|---|---|---|
+| `ANTHROPIC_API_KEY` | your key | What-if chat uses Claude instead of offline mode |
+| `TELEGRAM_BOT_TOKEN`, `SMTP_*`, `TWILIO_*` | provider credentials | Real alert delivery |
+| `PUBLIC_BASE_URL` | the Space URL | Working one-tap acknowledge links |
+| `CORS_ORIGINS` | your Vercel URL | Only needed if the frontend calls the Space directly |
+
+The Space's disk is ephemeral: alerts and chat history (SQLite at `/tmp`) reset
+on every restart. Set `DATABASE_URL` to a hosted Postgres to keep them.
+
+## 2. Frontend on Vercel
+
+1. In `vercel.json`, replace `REPLACE-WITH-YOUR-BACKEND-HOST` with the Space
+   host, e.g. `priya-varuna-backend.hf.space` (no `https://`, no trailing slash).
+   Commit and push.
+2. https://vercel.com/new → import `Priya-T-S/varuna` → **Root Directory:
+   leave as the repo root** (`vercel.json` builds `frontend/` itself) → Deploy.
+3. Open the Vercel URL. The dashboard, forecasts, what-if and alerts all work
+   through `/api` on that same domain.
+
+Leave `VITE_API_URL` **unset** on Vercel so requests stay same-origin and go
+through the proxy.
+
+## Notes
+
+- **First request after idle is slow.** A free Space sleeps after ~48 h
+  unused; the next request wakes it (~30 s), and the frontend's 20 s timeout
+  may show an error once. Open the health URL before a demo.
+- **Live alert feed through the proxy.** SSE (`/api/v1/alerts/stream`) works
+  but is buffered by some proxies. If the "Live" indicator stays off in
+  production, set `VITE_API_URL` to the Space URL on Vercel and add that Vercel
+  URL to `CORS_ORIGINS` on the Space; the feed then connects directly.
+- **`backend/Dockerfile` vs the root `Dockerfile`.** The one in `backend/`
+  ships only the API (used by `deployment/docker-compose.yml`, where models are
+  mounted). The root `Dockerfile` bundles `ai_models/`, `explainability/`,
+  `config/` and `data/geo/`, which is what a standalone host needs.
+- **Local development is unchanged:** `uvicorn app.main:app --reload` in
+  `backend/`, `npm run dev` in `frontend/`.

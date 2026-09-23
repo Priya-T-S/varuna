@@ -1,0 +1,26 @@
+# Keep the backend image small: everything the app does not need at runtime.
+.git
+.github
+.myapp
+**/.myapp
+**/__pycache__
+**/*.pyc
+.pytest_cache
+frontend
+notebooks
+reports
+docs
+deployment
+database
+satellite_processing
+data/raw
+data/processed
+data/external
+data/labels
+data/metadata
+backend/tests
+backend/varuna.db
+backend/.myapp
+*.md
+.env
+.env.*
