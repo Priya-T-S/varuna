@@ -28,8 +28,11 @@ COPY explainability explainability
 COPY config config
 COPY data/geo data/geo
 
+# 7860 is the Hugging Face Spaces default; hosts that assign a port (Railway,
+# Render, Fly) set $PORT and the shell-form CMD below picks it up.
+ENV PORT=7860
 EXPOSE 7860
 HEALTHCHECK --interval=30s --timeout=5s --start-period=90s \
-  CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:7860/api/v1/health')"
+  CMD python -c "import os,urllib.request; urllib.request.urlopen('http://localhost:%s/api/v1/health' % os.environ.get('PORT','7860'))"
 
-CMD ["uvicorn", "app.main:app", "--app-dir", "backend", "--host", "0.0.0.0", "--port", "7860"]
+CMD uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port ${PORT:-7860}

@@ -1,6 +1,7 @@
 # Deployment
 
-Two pieces, one public URL:
+Two pieces, one public URL. The backend runs on any Docker host — Hugging
+Face Spaces (free, sleeps when idle) or Railway (paid, always on):
 
 - **Frontend** (React/Vite) on **Vercel** — static, fast, free.
 - **Backend** (FastAPI + PyTorch + SHAP) on **Hugging Face Spaces** (Docker) —
@@ -43,6 +44,18 @@ Optional Space **Settings → Variables and secrets**:
 
 The Space's disk is ephemeral: alerts and chat history (SQLite at `/tmp`) reset
 on every restart. Set `DATABASE_URL` to a hosted Postgres to keep them.
+
+### Alternative: backend on Railway
+
+Paid (a one-time trial credit, then ~$5/month) but it never sleeps, redeploys
+on every GitHub push and supports a custom domain.
+
+1. https://railway.app → **New Project → Deploy from GitHub repo** → this repo.
+   Railway detects the root `Dockerfile`; no build settings needed.
+2. **Settings → Networking → Generate Domain**. Railway sets `$PORT`, which the
+   image already honours.
+3. Same variables as the Spaces table below, under **Variables**.
+4. Check `https://<domain>/api/v1/health`, then use that host in `vercel.json`.
 
 ## 2. Frontend on Vercel
 
