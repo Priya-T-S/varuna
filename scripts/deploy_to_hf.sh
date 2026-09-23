@@ -27,7 +27,10 @@ command -v git-lfs >/dev/null 2>&1 || { echo "git-lfs is required: https://git-l
 
 SOURCE_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 REMOTE_URL="https://huggingface.co/spaces/${USER_NAME}/${SPACE_NAME}"
-cleanup() { git checkout -q "${SOURCE_BRANCH}"; }
+# -f is needed because files the Space commit leaves out (frontend, docs,
+# tests) sit in the working tree as untracked copies of the same content.
+# Safe here: the script refuses to run unless the tree is clean to begin with.
+cleanup() { git checkout -f -q "${SOURCE_BRANCH}"; }
 trap cleanup EXIT
 
 echo "==> Rebuilding the 'space' branch from ${SOURCE_BRANCH}"
