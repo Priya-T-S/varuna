@@ -13,9 +13,9 @@ Face Spaces (free, sleeps when idle) or Railway (paid, always on):
 
 Vercel's Python functions cap at 250 MB unzipped; `torch` alone is ~540 MB
 installed. The backend also runs a background alert monitor and an SSE feed,
-which serverless functions cannot keep alive. Free tiers with 512 MB RAM
-(Render, Railway) are below the ~390 MB the loaded models already occupy, so
-Spaces (16 GB, free) is the comfortable fit.
+which serverless functions cannot keep alive. Render's free tier (512 MB RAM)
+is too close to the ~390 MB the loaded models already occupy, and Railway has
+no free tier, so Spaces (16 GB, free) is the comfortable default.
 
 ## 1. Backend on Hugging Face Spaces
 
@@ -54,7 +54,7 @@ on every GitHub push and supports a custom domain.
    Railway detects the root `Dockerfile`; no build settings needed.
 2. **Settings → Networking → Generate Domain**. Railway sets `$PORT`, which the
    image already honours.
-3. Same variables as the Spaces table below, under **Variables**.
+3. Same variables as the Spaces table above, under **Variables**.
 4. Check `https://<domain>/api/v1/health`, then use that host in `vercel.json`.
 
 ## 2. Frontend on Vercel
