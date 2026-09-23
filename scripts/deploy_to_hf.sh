@@ -34,11 +34,19 @@ echo "==> Rebuilding the 'space' branch from ${SOURCE_BRANCH}"
 git branch -D space >/dev/null 2>&1 || true
 git checkout -q --orphan space
 
-# Track the model weights with LFS *before* staging, so they are stored as
-# pointers and the 10 MB limit never applies.
+# The orphan checkout carries main's index over. Empty it (the working tree is
+# untouched) so only the paths added below end up in the Space commit, and so
+# every added file passes through the LFS filter.
+git rm -r -q --cached .
+
+# Track binaries with LFS *before* staging: a Space rejects large or binary
+# files that are stored as plain git blobs.
 cat > .gitattributes <<'ATTRS'
-*.pkl filter=lfs diff=lfs merge=lfs -text
-*.pt  filter=lfs diff=lfs merge=lfs -text
+*.pkl  filter=lfs diff=lfs merge=lfs -text
+*.pt   filter=lfs diff=lfs merge=lfs -text
+*.png  filter=lfs diff=lfs merge=lfs -text
+*.jpg  filter=lfs diff=lfs merge=lfs -text
+*.jpeg filter=lfs diff=lfs merge=lfs -text
 ATTRS
 
 # A Space reads its configuration from this front matter.
@@ -61,10 +69,20 @@ front = (
 open("README.md", "w", encoding="utf-8").write(front + body)
 PY
 
-git add -A
-# `git checkout --orphan` carries the index over, so the model files are still
-# staged as plain blobs; re-staging them runs the LFS clean filter.
-git add --renormalize .
+# Only what the backend image needs. The frontend, reports, notebooks and test
+# data stay out: they would bloat the Space and their .png/.jpg files are
+# exactly what the Hub's binary-file check rejects.
+git add \
+  .gitattributes \
+  README.md \
+  Dockerfile \
+  .dockerignore \
+  backend/requirements.txt \
+  backend/app \
+  ai_models \
+  explainability \
+  config \
+  data/geo
 git commit -q -m "Deploy VARUNA AI backend to Hugging Face Spaces"
 
 # Fail loudly rather than pushing something a Space will reject.
