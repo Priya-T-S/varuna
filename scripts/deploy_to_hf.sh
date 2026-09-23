@@ -62,7 +62,18 @@ open("README.md", "w", encoding="utf-8").write(front + body)
 PY
 
 git add -A
+# `git checkout --orphan` carries the index over, so the model files are still
+# staged as plain blobs; re-staging them runs the LFS clean filter.
+git add --renormalize .
 git commit -q -m "Deploy VARUNA AI backend to Hugging Face Spaces"
+
+# Fail loudly rather than pushing something a Space will reject.
+BIG="$(git ls-tree -r -l HEAD | awk '$4 > 10485760 {print $5}')"
+if [ -n "${BIG}" ]; then
+  echo "These files exceed the 10 MB Space limit and are not LFS-tracked:" >&2
+  echo "${BIG}" | sed 's/^/    /' >&2
+  exit 1
+fi
 
 echo "==> Model files stored via LFS:"
 git lfs ls-files | sed 's/^/    /'
