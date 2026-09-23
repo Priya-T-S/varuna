@@ -21,17 +21,25 @@ no free tier, so Spaces (16 GB, free) is the comfortable default.
 
 1. https://huggingface.co/new-space → name `varuna-backend`, SDK **Docker**
    (blank template), visibility public, hardware **CPU basic (free)**.
-2. Push this repository to the Space (the root `Dockerfile` is what it builds):
+2. Create a **write token** at https://huggingface.co/settings/tokens.
+3. From the repo root, in Git Bash:
 
    ```bash
-   git remote add space https://huggingface.co/spaces/<your-username>/varuna-backend
-   git push space main
+   scripts/deploy_to_hf.sh <your-hf-username>
    ```
 
-   The first build takes ~10 minutes (PyTorch). Watch the **Logs** tab.
-3. Check it: `https://<your-username>-varuna-backend.hf.space/api/v1/health`
-   returns `{"status":"ok",...}`, and `/api/v1/predictions/model-info` reports
-   `"model_loaded": true`.
+   It asks for your username and that token. Re-run it after any change on
+   `main` to redeploy. Add `--dry-run` to build the branch without pushing.
+
+   The script exists because a Space rejects files over 10 MB unless they use
+   Git LFS, and `rainfall_model_v1.pkl` is 28 MB. It rebuilds an orphan `space`
+   branch that stores the model files as LFS objects and adds the YAML front
+   matter a Space needs in its README, then force-pushes that branch to the
+   Space's `main`. Your GitHub history is untouched.
+
+4. The first build takes ~10 minutes (PyTorch). Watch the Space's **Logs** tab.
+   Then check `https://<username>-varuna-backend.hf.space/api/v1/health` and
+   `/api/v1/predictions/model-info`, which should report `"model_loaded": true`.
 
 Optional Space **Settings → Variables and secrets**:
 
@@ -60,7 +68,8 @@ on every GitHub push and supports a custom domain.
 ## 2. Frontend on Vercel
 
 1. In `vercel.json`, replace `REPLACE-WITH-YOUR-BACKEND-HOST` with the Space
-   host, e.g. `priya-varuna-backend.hf.space` (no `https://`, no trailing slash).
+   host, e.g. `<your-hf-username>-varuna-backend.hf.space` (no `https://`, no
+   trailing slash).
    Commit and push.
 2. https://vercel.com/new → import `Priya-T-S/varuna` → **Root Directory:
    leave as the repo root** (`vercel.json` builds `frontend/` itself) → Deploy.
